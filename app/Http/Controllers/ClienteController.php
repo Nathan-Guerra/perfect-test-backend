@@ -17,7 +17,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        return route('dashboard');
+        return redirect()->route('dashboard');
     }
 
 
