@@ -202,4 +202,42 @@
             </table>
         </div>
     </div>
+    
+    <div class='card mt-3'>
+        <div class='card-body'>
+            <h5 class="card-title mb-5">Clientes
+                <a href='{{ route('clientes.create') }}' class='btn btn-secondary float-right btn-sm rounded-pill'><i class='fa fa-plus'></i>  Novo cliente</a></h5>
+            <table class='table'>
+                <tr>
+                    <th scope="col">
+                        Nome
+                    </th>
+                    <th scope="col">
+                        Email
+                    </th>
+                    <th scope="col">
+                        CPF
+                    </th>
+                    <th scope="col">
+                        Ações
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Perfect Caps
+                    </td>
+                    <td>
+                        R$ 100,00
+                    </td>
+                    <td>
+                        143.094.857-40
+                    </td>
+                    <td>
+                        <a href='' class='btn btn-primary'>Editar</a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
 @endsection
