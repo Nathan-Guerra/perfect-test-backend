@@ -22,15 +22,13 @@ const formEl = document.querySelector('form');
 let precoEl = formEl.querySelector('#preco');
 VMasker(precoEl).maskMoney(moneyConfig);
 
-if (formEl.length) {
-    formEl.onsubmit = e => {
-        e.preventDefault();
-        let preco = precoEl.value
-            .replace('R$ ', '')
-            .replace(/(\.)/g, '')
-            .replace(',', '.');
+formEl.onsubmit = e => {
+    e.preventDefault();
+    let preco = precoEl.value
+        .replace('R$ ', '')
+        .replace(/(\.)/g, '')
+        .replace(',', '.');
 
-        precoEl.value = preco;
-        formEl.submit();
-    }
+    precoEl.value = preco;
+    formEl.submit();
 }
