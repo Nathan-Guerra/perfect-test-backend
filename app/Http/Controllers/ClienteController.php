@@ -24,7 +24,7 @@ class ClienteController extends Controller
     public function create()
     {
         $url = route('clientes.store');
-        return view('clientes.save')->with(compact('url'));
+        return view('clientes.cliente_form')->with(compact('url'));
     }
 
     public function store(ClienteRequest $request)
@@ -36,7 +36,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         $url = route('clientes.update', $cliente->id);
-        return view('clientes.save')->with(compact('cliente', 'url'));
+        return view('clientes.cliente_form')->with(compact('cliente', 'url'));
     }
 
     public function edit(Cliente $cliente)

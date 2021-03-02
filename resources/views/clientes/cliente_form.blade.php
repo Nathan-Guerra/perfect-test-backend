@@ -1,5 +1,10 @@
 @extends('layout')
 
+@section('script')
+    <script defer src="{{ mix('js/cliente_form.js') }}"></script>
+    
+@endsection
+
 @section('content')
     <h1>Adicionar / Editar Cliente</h1>
     <div class='card'>
