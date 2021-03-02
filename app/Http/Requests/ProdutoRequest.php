@@ -33,6 +33,7 @@ class ProdutoRequest extends FormRequest
     public function messages()
     {
         return [
+            '*.required' => 'O campo :attribute é obrigatório',
             'nome.max' => 'O :attribute deve conter no máximo :max caracteres.',
             'preco.min' => 'O :attribute deve ser maior do que :min.',
             'preco.numeric' => 'O :attribute deve ser um valor numérico.',

@@ -80,6 +80,7 @@ class ClienteRequest extends FormRequest
     public function messages()
     {
         return [
+            '*.required' => 'O campo :attribute é obrigatório',
             '*.max' => 'O :attribute deve conter no máximo :max caracteres.',
             'email.email' => 'O :attribute não está formatado corretamente.',
             'cpf.size' => 'O :attribute deve estar no formato correto (999.999.999-99).',
