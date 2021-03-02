@@ -17,10 +17,10 @@ class CreateVendas extends Migration
             $table->id();
             $table->foreignId('id_cliente')->constrained('clientes');
             $table->foreignId('id_produto')->constrained('produtos');
-            $table->dateTime('data_venda');
-            $table->unsignedDecimal('desconto');
+            $table->date('data_venda');
+            $table->unsignedDecimal('desconto')->default(0);
             $table->unsignedInteger('quantidade');
-            $table->char('status')->comment('v: vendido, c: cancelado, d: devolvido');
+            $table->char('status', 1)->comment('v: vendido, c: cancelado, d: devolvido');
         });
     }
 

@@ -11,7 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+// .js('resources/js/app.js', 'public/js')
     .styles('resources/css/bootstrap.css', 'public/css/app.css')
     .js('resources/js/produtos/produto_form.js', 'public/js')
-    .js('resources/js/clientes/cliente_form.js', 'public/js');
+    .js('resources/js/clientes/cliente_form.js', 'public/js')
+    .js('resources/js/vendas/venda_form.js', 'public/js');
