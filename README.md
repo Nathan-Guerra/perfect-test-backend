@@ -41,9 +41,6 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 ```
  - Atualize as dependências
 ```
- $ npm install
-```
-```
  $ composer install
 ```
 
