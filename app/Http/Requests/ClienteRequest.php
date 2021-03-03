@@ -29,7 +29,6 @@ class ClienteRequest extends FormRequest
             'cpf' => [
                 'required',
                 'size:14',
-                'unique:clientes',
                 function ($attribute, $value, $fail) {
                     // somente os numeros
                     $CPFDigits = str_replace(['.', '-'], '', $value);
