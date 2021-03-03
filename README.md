@@ -31,9 +31,10 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
  ### Implementação
 
- - Primeiro, clone o repositório para uma pasta desejada
+ - Primeiro, clone o repositório para uma pasta desejada 
+ ```
  $ git clone https://github.com/Nathan-Guerra/perfect-test-backend.git
-
+ ```
  - Entre na pasta do projeto
  ```
  $ cd perfect-test-backend
