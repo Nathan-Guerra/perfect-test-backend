@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -34,12 +35,13 @@ class Venda extends Model
         return $query->where('status', 'd');
     }
 
-    public function cliente() {
-        return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
-    }
-    
-    public function produto() {
-        return $this->belongsTo(Produto::class, 'id_produto', 'id');
+    public function scopeEntreDatas(Builder $query, DateTimeInterface $dataInicio, DateTimeInterface $dataFim){
+        return $query
+            ->where('data_venda', '>=', $dataInicio)
+            ->where('data_venda', '<=', $dataFim);
     }
 
+    public function scopeCliente(Builder $query, int $idCliente) {
+        return $query->where('id_cliente', $idCliente);
+    }
 }

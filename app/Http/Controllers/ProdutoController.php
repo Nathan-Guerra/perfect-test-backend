@@ -23,8 +23,7 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        $url = route('produtos.store');
-        return view('produtos.produto_form')->with(compact('url'));
+        return view('produtos.produto_form');
     }
 
     public function store(ProdutoRequest $request)
@@ -35,20 +34,20 @@ class ProdutoController extends Controller
 
     public function show(Produto $produto)
     {
-        $url = route('produtos.update', $produto->id);
+        $url = route('produtos.update', $produto);
         return view('produtos.produto_form')->with(compact('produto', 'url'));
     }
-
+    
     public function edit(Produto $produto)
     {
-        return view('produtos.show')->with('produto', $produto);
+        $url = route('produtos.update', $produto);
+        return view('produtos.produto_form')->with(compact('produto', 'url'));
     }
 
     public function update(ProdutoRequest $request, Produto $produto)
     {
-        dd($produto, $request);
-        // return $this->service->update($produto);
-        // return view('produtos.show')->with('produto', $produto);
+        $this->service->update($produto->id, $request->validated());
+        return redirect()->route('dashboard');
     }
 
     public function destroy(int $id)

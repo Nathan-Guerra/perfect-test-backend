@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Produto;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProdutoRepository
@@ -46,5 +47,10 @@ class ProdutoRepository
             return false;
 
         }
+    }
+    
+    public function all(): Collection
+    {
+        return $this->model->all();
     }
 }

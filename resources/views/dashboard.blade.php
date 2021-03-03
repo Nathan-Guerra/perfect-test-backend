@@ -1,35 +1,42 @@
 @extends('layout')
 
+@section('script')
+    <script defer src="{{ mix('js/dashboard.js') }}"></script>
+@endsection
+
 @section('content')
     <h1>Dashboard de vendas</h1>
     <div class='card mt-3'>
         <div class='card-body'>
             <h5 class="card-title mb-5">Tabela de vendas
                 <a href='{{ route('vendas.create') }}' class='btn btn-secondary float-right btn-sm rounded-pill'><i class='fa fa-plus'></i>  Nova venda</a></h5>
-            <form>
+            <form action="{{ route('vendas.date-customer') }}" method="POST">
+                @csrf
                 <div class="form-row align-items-center">
                     <div class="col-sm-5 my-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Clientes</div>
                             </div>
-                            <select class="form-control" id="inlineFormInputName">
-                                <option>Clientes</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <select class="form-control" id="cliente_busca" name="cliente_busca" required>
+                                <option selected></option>
+
+                                @if(!empty($clientes))
+                                    @foreach($clientes as $cliente)
+                                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                                    @endforeach
+                                @endif
+
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-6 my-1">
-                        <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+                        <label class="sr-only" for="range_datas">Username</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Período</div>
                             </div>
-                            <input type="text" class="form-control date_range" id="inlineFormInputGroupUsername" placeholder="Username">
+                            <input required type="text" class="form-control date_range" id="range_datas" name="range_datas" placeholder="Username">
                         </div>
                     </div>
                     <div class="col-sm-1 my-1">
@@ -53,48 +60,34 @@
                         Ações
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        Perfect Caps
-                    </td>
-                    <td>
-                        20/07/2019 19h15
-                    </td>
-                    <td>
-                        R$ 100,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nature Caps
-                    </td>
-                    <td>
-                        20/07/2019 19h20
-                    </td>
-                    <td>
-                        R$ 125,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Libid Caps
-                    </td>
-                    <td>
-                        20/07/2019 19h45
-                    </td>
-                    <td>
-                        R$ 110,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
+
+                
+                @if(Session::has('vendasFiltradas'))
+                    @php
+                        $vendas = Session::pull('vendasFiltradas');    
+                    @endphp
+                @endif
+
+                @if(!empty($vendas))
+                    @foreach($vendas as $venda)
+                        <tr>
+                            <td>
+                                {{ $venda->nome_produto }}
+                            </td>
+                            <td>
+                                {{ date_format(new DateTimeImmutable($venda->data_venda), 'd/m/Y') }}
+                            </td>
+                            <td>
+                                {{ $venda->preco }}
+                            </td>
+                            <td>
+                                <a href="{{ route('vendas.edit', ['venda' => $venda]) }}" class='btn btn-primary'>Editar</a>
+                                <a data-token="{{ csrf_token() }}" href="{{ route('vendas.destroy', ['venda' => $venda]) }}" class='btn btn-danger btn-remove'>Remover</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
             </table>
         </div>
     </div>
@@ -118,10 +111,10 @@
                         Vendidos
                     </td>
                     <td>
-                        100
+                        {{ $totalVendidos[0] }}
                     </td>
                     <td>
-                        R$ 100,00
+                        {{ $totalVendidos[1] }}
                     </td>
                 </tr>
                 <tr>
@@ -129,10 +122,10 @@
                         Cancelados
                     </td>
                     <td>
-                        120
+                        {{ $totalCancelados[0]}}
                     </td>
                     <td>
-                        R$ 100,00
+                        {{ $totalCancelados[1] }}
                     </td>
                 </tr>
                 <tr>
@@ -140,10 +133,10 @@
                         Devoluções
                     </td>
                     <td>
-                        120
+                        {{ $totalDevolvidos[0]}}
                     </td>
                     <td>
-                        R$ 100,00
+                        {{ $totalDevolvidos[1] }}
                     </td>
                 </tr>
             </table>
@@ -166,43 +159,27 @@
                         Ações
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        Perfect Caps
-                    </td>
-                    <td>
-                        R$ 100,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nature Caps
-                    </td>
-                    <td>
-                        R$ 120,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Libid Caps
-                    </td>
-                    <td>
-                        R$ 150,00
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
+
+                @if(!empty($produtos))
+                    @foreach($produtos as $produto)
+                        <tr>
+                            <td>
+                                {{ $produto->nome }}
+                            </td>
+                            <td>
+                                {{ 'R$ ' . number_format($produto->preco, 2, ',', '.') }}
+                            </td>
+                            <td>
+                                <a href="{{ route('produtos.edit', ['produto' =>$produto]) }}" class='btn btn-primary'>Editar</a>
+                                <a data-token="{{ csrf_token() }}" href="{{ route('produtos.destroy', ['produto' =>$produto]) }}" class='btn btn-danger btn-remove'>Remover</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
             </table>
         </div>
     </div>
-    
     <div class='card mt-3'>
         <div class='card-body'>
             <h5 class="card-title mb-5">Clientes
@@ -222,21 +199,27 @@
                         Ações
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        Perfect Caps
-                    </td>
-                    <td>
-                        R$ 100,00
-                    </td>
-                    <td>
-                        143.094.857-40
-                    </td>
-                    <td>
-                        <a href='' class='btn btn-primary'>Editar</a>
-                    </td>
-                </tr>
-                
+
+                @if(!empty($clientes))
+                    @foreach($clientes as $cliente)
+                        <tr>
+                            <td>
+                                {{ $cliente->nome }}
+                            </td>
+                            <td>
+                                {{ $cliente->email }}
+                            </td>
+                            <td>
+                                {{ $cliente->cpf }}
+                            </td>
+                            <td>
+                                <a href="{{ route('clientes.edit', ['cliente' => $cliente]) }}" class='btn btn-primary'>Editar</a>
+                                <a data-token="{{ csrf_token() }}" href="{{ route('clientes.destroy', ['cliente' => $cliente]) }}" class='btn btn-danger btn-remove'>Remover</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
             </table>
         </div>
     </div>

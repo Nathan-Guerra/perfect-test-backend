@@ -209,7 +209,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/clientes/([^/]++)(?|(*:28)|/edit(*:40)|(*:47))|/produtos/([^/]++)(?|(*:76)|/edit(*:88)|(*:95))|/vendas/([^/]++)(?|(*:122)|/edit(*:135)|(*:143)))/?$}sDu',
+      0 => '{^(?|/clientes/([^/]++)(?|(*:28)|/edit(*:40)|(*:47))|/produtos/([^/]++)(?|(*:76)|/edit(*:88)|(*:95))|/vendas/(?|([^/]++)(?|(*:125)|/edit(*:138)|(*:146))|filter\\-customer\\-date(*:177)))/?$}sDu',
     ),
     3 => 
     array (
@@ -389,7 +389,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      122 => 
+      125 => 
       array (
         0 => 
         array (
@@ -412,7 +412,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      135 => 
+      138 => 
       array (
         0 => 
         array (
@@ -435,7 +435,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      143 => 
+      146 => 
       array (
         0 => 
         array (
@@ -476,7 +476,28 @@ app('router')->setCompiledRoutes(
           5 => true,
           6 => NULL,
         ),
-        2 => 
+      ),
+      177 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'vendas.date-customer',
+          ),
+          1 => 
+          array (
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
         array (
           0 => NULL,
           1 => NULL,
@@ -1264,6 +1285,41 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+    ),
+    'vendas.date-customer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'vendas/filter-customer-date',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\VendaController@filterCustomerAndDate',
+        'controller' => 'App\\Http\\Controllers\\VendaController@filterCustomerAndDate',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => NULL,
+        'where' => 
+        array (
+        ),
+        'as' => 'vendas.date-customer',
       ),
       'fallback' => false,
       'defaults' => 

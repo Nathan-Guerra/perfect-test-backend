@@ -23,8 +23,7 @@ class ClienteController extends Controller
 
     public function create()
     {
-        $url = route('clientes.store');
-        return view('clientes.cliente_form')->with(compact('url'));
+        return view('clientes.cliente_form');
     }
 
     public function store(ClienteRequest $request)
@@ -35,20 +34,20 @@ class ClienteController extends Controller
 
     public function show(Cliente $cliente)
     {
-        $url = route('clientes.update', $cliente->id);
+        $url = route('clientes.update', $cliente);
         return view('clientes.cliente_form')->with(compact('cliente', 'url'));
     }
-
+    
     public function edit(Cliente $cliente)
     {
-        return view('clientes.show')->with('cliente', $cliente);
+        $url = route('clientes.update', $cliente);
+        return view('clientes.cliente_form')->with(compact('cliente', 'url'));
     }
 
     public function update(ClienteRequest $request, Cliente $cliente)
     {
-        dd($cliente, $request);
-        // return $this->service->update($cliente);
-        // return view('clientes.show')->with('cliente', $cliente);
+        $this->service->update($cliente->id, $request->validated());
+        return redirect()->route('dashboard');
     }
 
     public function destroy(int $id)

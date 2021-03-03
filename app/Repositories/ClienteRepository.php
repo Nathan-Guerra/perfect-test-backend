@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Cliente;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ClienteRepository
@@ -15,7 +16,7 @@ class ClienteRepository
         $this->model = $model;
     }
 
-    public function create(array $data): int 
+    public function create(array $data): int
     {
         try {
             $cliente = $this->model->create($data);
@@ -44,7 +45,11 @@ class ClienteRepository
             return true;
         } catch (\Exception $e) {
             return false;
-
         }
+    }
+
+    public function all(): Collection
+    {
+        return $this->model->all();
     }
 }

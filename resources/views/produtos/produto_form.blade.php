@@ -8,12 +8,21 @@
     <h1>Adicionar / Editar Produto</h1>
     <div class='card'>
         <div class='card-body'>
-            <form action="{{ route('produtos.store') }}" method="POST">
+            <form action="{{ $url ?? route('produtos.store') }}" method="POST">
                 @csrf
+                @isset($url)
+                    <input type="hidden" name="_method" value="PUT">
+                @endisset
                 <h5>Informações do produto</h5>
                 <div class="form-group">
                     <label for="nome">Nome do produto</label>
-                    <input type="text" required class="form-control @error('nome') is-invalid @enderror" id="nome" name="nome" value="{{ old('nome') }}">
+                    <input 
+                        type="text" 
+                        required 
+                        class="form-control @error('nome') is-invalid @enderror" 
+                        id="nome" 
+                        name="nome" 
+                        value="{{ old('nome') ?? $produto->nome ?? '' }}">
                     @error('nome')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
@@ -26,14 +35,21 @@
                         rows='5' 
                         class="form-control @error('descricao') is-invalid @enderror" 
                         id="descricao" 
-                        name="descricao">{{ old('descricao') }}</textarea>
+                        name="descricao">{{ old('descricao') ?? $produto->descricao ?? '' }}</textarea>
                     @error('descricao')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="preco">Preço</label>
-                    <input type="text" required class="form-control @error('preco') is-invalid @enderror" id="preco" name="preco" value="{{ old('preco') }}" placeholder="100,00 ou maior">
+                    <input 
+                        type="text" 
+                        required 
+                        class="form-control @error('preco') is-invalid @enderror" 
+                        id="preco" 
+                        name="preco" 
+                        value="{{ old('preco') ?? $produto->preco ?? '' }}" 
+                        placeholder="100,00 ou maior">
                     @error('preco')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
