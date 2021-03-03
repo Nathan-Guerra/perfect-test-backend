@@ -10,3 +10,5 @@ Route::resource('clientes', ClienteController::class);
 Route::resource('produtos', ProdutoController::class);
 
 Route::resource('vendas', VendaController::class);
+
+Route::post('vendas/filter-customer-date', [App\Http\Controllers\VendaController::class, 'filterCustomerAndDate'])->name('vendas.date-customer');
